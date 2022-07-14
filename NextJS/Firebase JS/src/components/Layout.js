@@ -21,18 +21,18 @@ export default function Layout({ children }) {
           {currentUserState ? (
             <>
               <main
-                className=" h-96 max-w-4xl min-w-300 m-auto items-center"
+                className=" max-w-4xl min-w-300 m-auto items-center"
                 id="main"
               >
                 <div>{children}</div>
               </main>
-              <Footer />
             </>
           ) : (
             <>
               <LoggedOut />
             </>
           )}
+          <Footer />
         </>
       )}
     </>

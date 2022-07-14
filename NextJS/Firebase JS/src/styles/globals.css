@@ -18,9 +18,10 @@ a {
 
 hr {
   width: -webkit-fill-available;
-  max-width: 450px;
+  max-width: 90vw;
   margin: 5px auto;
-  border: 1px dashed #000;
+  border-style: solid;
+  @apply max-w-4xl;
 }
 
 * {

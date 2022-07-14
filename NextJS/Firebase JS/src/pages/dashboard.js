@@ -6,7 +6,7 @@ import { appCheck } from "../config/firebase";
 import { getToken } from "firebase/app-check";
 
 import Meta from "../components/Meta";
-import CurrentlyLoggedOut from "../components/CurrentlyLoggedOut";
+import LoggedOut from "../components/LoggedOut";
 
 export default function Dashboard() {
   const { currentUser, currentUserEV, currentUserEmail } = useAuth();
@@ -82,7 +82,7 @@ export default function Dashboard() {
           </div>
         </>
       ) : (
-        <CurrentlyLoggedOut />
+        <LoggedOut />
       )}
     </>
   );

@@ -131,6 +131,7 @@ export default function Nav({ appName }) {
           )}
         </Group>
       </div>
+      <hr />
       <NavModal modalOpen={modalOpen} handleClose={closeM} />
     </>
   );
