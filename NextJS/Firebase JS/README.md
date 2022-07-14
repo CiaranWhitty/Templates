@@ -2,18 +2,18 @@
 
 ## Auth:
 
-### By Email
+1. By Email
 
 ## Functions:
 
-### Express
+1. Express
 
-### Cors
+2. Cors
 
 ## Realtime Database:
 
 ## Others: (Optional)
 
-### TailWind
+1. TailWind
 
-### Mantine UI
+2. Mantine UI

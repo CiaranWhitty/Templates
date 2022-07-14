@@ -5,8 +5,8 @@
 
 ## Next JS:
 
-### 1:
+1. Firebase as JS
 
 ## React JS:
 
-### 1:
+1. 
