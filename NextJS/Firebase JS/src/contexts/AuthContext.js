@@ -8,7 +8,7 @@ import {
   updatePassword,
   signOut,
   browserSessionPersistence,
-  setPersistence
+  setPersistence,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { useSnackbar } from "notistack";
@@ -23,6 +23,7 @@ export default function AuthProvider(props) {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentUserEmail, setCurrentUserEmail] = useState();
   const [currentUserEV, setCurrentUserEV] = useState(false);
+  const [currentUserState, setCurrentUserState] = useState(null);
   const [loading, setLoading] = useState(true);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -34,24 +35,27 @@ export default function AuthProvider(props) {
     setPersistence(auth, browserSessionPersistence)
       .then(async () => {
         try {
-          await signInWithEmailAndPassword(auth, email, password)
-            .then((obj) => {
+          await signInWithEmailAndPassword(auth, email, password).then(
+            (obj) => {
               if (obj.user.emailVerified) {
                 setCurrentUserEV(true);
-                enqueueSnackbar("You Are Now Signed In", { variant: "success" });
-                handleCloseM()
+                enqueueSnackbar("You Are Now Signed In", {
+                  variant: "success",
+                });
+                handleCloseM();
               } else {
                 send_verification();
-                enqueueSnackbar("Please Verify Your Email", { variant: "info" });
+                enqueueSnackbar("Please Verify Your Email", {
+                  variant: "info",
+                });
                 setCurrentUserEV(false);
                 signOut(auth);
               }
-            });
-
+            }
+          );
         } catch (error) {
           enqueueSnackbar("Login Failed", { variant: "error" });
-        };
-
+        }
       })
       .catch((error) => {
         enqueueSnackbar("Login Failed", { variant: "error" });
@@ -70,8 +74,8 @@ export default function AuthProvider(props) {
   function updatePassword(password) {
     return currentUser
       .updatePassword(auth, password)
-      .then(() => { })
-      .catch((error) => { });
+      .then(() => {})
+      .catch((error) => {});
   }
 
   function send_verification() {
@@ -89,13 +93,13 @@ export default function AuthProvider(props) {
     try {
       if (user.emailVerified) {
         setCurrentUserEV(true);
-        handleCloseM()
+        handleCloseM();
       } else {
         send_verification();
         setCurrentUserEV(false);
         signOut(auth);
       }
-    } catch { }
+    } catch {}
   }
 
   useEffect(() => {
@@ -105,10 +109,12 @@ export default function AuthProvider(props) {
         setCurrentUserEmail(currentUser.email);
         setCurrentUser(currentUser);
         checkIfVerified(currentUser);
+        setCurrentUserState(true);
         setLoading(false);
       } else {
         setCurrentUser(null);
         checkIfVerified(currentUser);
+        setCurrentUserState(false);
         setLoading(false);
       }
     });
@@ -119,6 +125,7 @@ export default function AuthProvider(props) {
     currentUser,
     currentUserEV,
     currentUserEmail,
+    currentUserState,
     login,
     signup,
     logout,

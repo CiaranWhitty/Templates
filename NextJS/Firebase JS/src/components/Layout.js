@@ -3,12 +3,13 @@ import { useSystem } from "../contexts/SystemContext";
 
 import Nav from "./Nav";
 import Footer from "./Footer";
+import LoggedOut from "./LoggedOut";
 
 import { Loader } from "@mantine/core";
 
 export default function Layout({ children }) {
-  const { loading } = useAuth();
-  const { appName, tooling } = useSystem();
+  const { loading, currentUserState } = useAuth();
+  const { appName } = useSystem();
 
   return (
     <>
@@ -17,13 +18,21 @@ export default function Layout({ children }) {
       ) : (
         <>
           <Nav appName={appName} />
-          <main
-            className=" h-96 max-w-4xl min-w-300 m-auto items-center"
-            id="main"
-          >
-            <div>{children}</div>
-          </main>
-          <Footer />
+          {currentUserState ? (
+            <>
+              <main
+                className=" h-96 max-w-4xl min-w-300 m-auto items-center"
+                id="main"
+              >
+                <div>{children}</div>
+              </main>
+              <Footer />
+            </>
+          ) : (
+            <>
+              <LoggedOut />
+            </>
+          )}
         </>
       )}
     </>
