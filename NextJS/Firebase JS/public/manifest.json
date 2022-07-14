@@ -1,0 +1,9 @@
+{
+  "name":"Firebase App NextJS",
+  "short_name":"Firebase App NextJS",
+  "start_url": "/?home=true",
+  
+  "theme_color":"#ffffff",
+  "background_color":"#ffffff",
+  "display":"standalone"
+}
